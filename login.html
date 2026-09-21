@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign in | Northstar</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+		:root {
+			--ink: #102b2a;
+			--muted: #68807d;
+			--line: #d9e6e1;
+			--paper: #fbfdfb;
+			--mint: #dff2e8;
+			--green: #1d6b59;
+			--green-dark: #145144;
+			--coral: #f18b72;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--ink);
+			background: #edf5f0;
+			font-family: 'DM Sans', sans-serif;
+		}
+
+		.page {
+			min-height: 100vh;
+			padding: 24px;
+			display: grid;
+			place-items: center;
+			background:
+				radial-gradient(circle at 8% 12%, rgba(241, 139, 114, .16), transparent 22rem),
+				radial-gradient(circle at 94% 88%, rgba(116, 190, 155, .2), transparent 26rem);
+		}
+
+		.shell {
+			width: min(1080px, 100%);
+			min-height: min(680px, calc(100vh - 48px));
+			display: grid;
+			grid-template-columns: minmax(300px, .92fr) minmax(390px, 1.08fr);
+			overflow: hidden;
+			background: var(--paper);
+			border: 1px solid rgba(16, 43, 42, .08);
+			border-radius: 28px;
+			box-shadow: 0 28px 80px rgba(37, 78, 67, .15);
+			animation: arrive .7s ease both;
+		}
+
+		.story {
+			position: relative;
+			overflow: hidden;
+			padding: clamp(32px, 5vw, 64px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			background: var(--green);
+			color: #f6fbf8;
+		}
+
+		.story::before,
+		.story::after {
+			content: '';
+			position: absolute;
+			border: 1px solid rgba(255, 255, 255, .15);
+			border-radius: 50%;
+			pointer-events: none;
+		}
+
+		.story::before { width: 430px; height: 430px; right: -235px; top: -160px; }
+		.story::after { width: 330px; height: 330px; left: -220px; bottom: -170px; }
+
+		.brand, .story-copy, .quote { position: relative; z-index: 1; }
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: 17px;
+			font-weight: 700;
+			letter-spacing: -.02em;
+		}
+
+		.brand-mark {
+			width: 30px;
+			height: 30px;
+			display: grid;
+			place-items: center;
+			color: var(--green-dark);
+			background: var(--coral);
+			border-radius: 9px 9px 9px 2px;
+			font-size: 14px;
+		}
+
+		.story-copy { max-width: 370px; margin-top: auto; margin-bottom: auto; padding: 56px 0; }
+
+		.eyebrow {
+			margin: 0 0 20px;
+			color: #b8e6d0;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+		}
+
+		h1, h2 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -.05em; }
+		h1 { max-width: 350px; margin: 0; font-size: clamp(40px, 5vw, 62px); line-height: .98; }
+		.story-copy p { max-width: 330px; margin: 24px 0 0; color: #cbe9dc; font-size: 16px; line-height: 1.65; }
+
+		.quote { margin: 0; max-width: 310px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.25); color: #dff3e8; font-size: 13px; line-height: 1.6; }
+		.quote cite { display: block; margin-top: 12px; color: #a8d7c0; font-size: 12px; font-style: normal; }
+
+		.form-panel {
+			display: flex;
+			align-items: center;
+			padding: clamp(32px, 7vw, 84px);
+		}
+
+		.form-wrap { width: min(100%, 390px); margin: 0 auto; }
+		.form-wrap h2 { margin: 0; font-size: clamp(30px, 4vw, 42px); line-height: 1.05; }
+		.intro { margin: 13px 0 34px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+		form { display: grid; gap: 18px; }
+		label { display: block; margin-bottom: 8px; color: #31514d; font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+		input {
+			width: 100%;
+			height: 52px;
+			padding: 0 15px;
+			color: var(--ink);
+			background: #fff;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			outline: none;
+			font: inherit;
+			transition: border-color .2s, box-shadow .2s;
+		}
+		input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(29, 107, 89, .12); }
+		.password-field { position: relative; }
+		.password-field input { padding-right: 70px; }
+		.show-password {
+			position: absolute;
+			top: 50%;
+			right: 12px;
+			padding: 6px;
+			color: var(--green);
+			background: none;
+			border: 0;
+			cursor: pointer;
+			font: inherit;
+			font-size: 11px;
+			font-weight: 700;
+			transform: translateY(-50%);
+		}
+
+		.options { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: -2px; font-size: 12px; }
+		.remember { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+		.remember input { width: 16px; height: 16px; accent-color: var(--green); }
+		a { color: var(--green); font-weight: 700; text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		.submit {
+			width: 100%;
+			height: 54px;
+			margin-top: 4px;
+			color: #fff;
+			background: var(--green-dark);
+			border: 0;
+			border-radius: 10px;
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+			transition: background .2s, transform .2s;
+		}
+		.submit:hover { background: var(--green); transform: translateY(-1px); }
+		.submit:active { transform: translateY(0); }
+		.divider { display: flex; align-items: center; gap: 12px; margin: 25px 0 18px; color: #91a6a2; font-size: 11px; }
+		.divider::before, .divider::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+		.signup { margin: 0; color: var(--muted); text-align: center; font-size: 13px; }
+		.message { min-height: 18px; margin: 10px 0 0; color: var(--green); font-size: 12px; text-align: center; }
+
+		@keyframes arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+		@media (max-width: 740px) {
+			.page { padding: 12px; }
+			.shell { min-height: calc(100vh - 24px); grid-template-columns: 1fr; border-radius: 20px; }
+			.story { min-height: 360px; padding: 30px; }
+			.story-copy { padding: 42px 0 34px; }
+			.story-copy p { margin-top: 16px; }
+			.quote { display: none; }
+			.form-panel { padding: 42px 30px 48px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<section class="shell" aria-label="Northstar account sign in">
+			<div class="story">
+				<div class="brand"><span class="brand-mark">N</span> northstar</div>
+				<div class="story-copy">
+					<p class="eyebrow">A clearer way forward</p>
+					<h1>Make room for what matters.</h1>
+					<p>Keep your projects, ideas, and momentum moving in one calm, focused space.</p>
+				</div>
+				<blockquote class="quote">“Northstar gives our team a shared sense of direction every morning.”<cite>Jamie Lee, product lead</cite></blockquote>
+			</div>
+
+			<div class="form-panel">
+				<div class="form-wrap">
+					<h2>Welcome back</h2>
+					<p class="intro">Sign in to pick up where you left off.</p>
+					<form id="login-form">
+						<div>
+							<label for="email">Email address</label>
+							<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+						</div>
+						<div>
+							<label for="password">Password</label>
+							<div class="password-field">
+								<input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+								<button class="show-password" type="button" aria-label="Show password">Show</button>
+							</div>
+						</div>
+						<div class="options">
+							<label class="remember"><input type="checkbox" name="remember"> Remember me</label>
+							<a href="#forgot">Forgot password?</a>
+						</div>
+						<button class="submit" type="submit">Sign in</button>
+					</form>
+					<p class="message" id="message" role="status" aria-live="polite"></p>
+					<div class="divider">OR</div>
+					<p class="signup">New to Northstar? <a href="#create-account">Create an account</a></p>
+				</div>
+			</div>
+		</section>
+	</main>
+	<script>
+		const password = document.querySelector('#password');
+		const showPassword = document.querySelector('.show-password');
+		const form = document.querySelector('#login-form');
+		const message = document.querySelector('#message');
+
+		showPassword.addEventListener('click', () => {
+			const visible = password.type === 'text';
+			password.type = visible ? 'password' : 'text';
+			showPassword.textContent = visible ? 'Show' : 'Hide';
+			showPassword.setAttribute('aria-label', visible ? 'Show password' : 'Hide password');
+		});
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			message.textContent = 'Demo mode: your sign-in form is ready to connect.';
+		});
+	</script>
+</body>
+</html>
