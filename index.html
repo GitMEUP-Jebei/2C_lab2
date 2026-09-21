@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northstar | Home</title>
+    <style>
+      :root {
+        --bg: #eef7f3;
+        --paper: #ffffff;
+        --paper-soft: #f7faf8;
+        --ink: #15342f;
+        --muted: #5f756f;
+        --line: #d6e7df;
+        --green: #1e6e5d;
+        --green-dark: #164f45;
+        --mint: #dff4ea;
+        --coral: #f18d74;
+        --shadow: 0 24px 60px rgba(11, 51, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(180deg, #edf7f2 0%, #f9fbfa 100%);
+        color: var(--ink);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(239, 247, 243, 0.8);
+        border-bottom: 1px solid rgba(21, 52, 47, 0.06);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 78px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px 10px 10px 4px;
+        background: var(--coral);
+        color: #fff;
+        font-size: 0.8rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 0.96rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--green);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        padding: 0.9rem 1.4rem;
+        border: 1px solid transparent;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .btn-primary {
+        background: var(--green-dark);
+        color: white;
+        box-shadow: 0 12px 24px rgba(22, 79, 69, 0.18);
+      }
+
+      .btn-primary:hover {
+        background: var(--green);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: white;
+        border-color: var(--line);
+        color: var(--ink);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--green);
+      }
+
+      .hero {
+        padding: 72px 0 54px;
+      }
+
+      .hero-box {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 34px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 0.55rem 0.8rem;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--green-dark);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 24px 0 18px;
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 0.96;
+        letter-spacing: -0.06em;
+      }
+
+      .lead {
+        max-width: 600px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .mini-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 38px;
+      }
+
+      .mini-stat {
+        min-width: 120px;
+      }
+
+      .mini-stat strong {
+        display: block;
+        font-size: 1.7rem;
+        letter-spacing: -0.05em;
+      }
+
+      .mini-stat span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-visual {
+        position: relative;
+        padding: 24px;
+      }
+
+      .card-panel {
+        background: linear-gradient(180deg, var(--paper) 0%, var(--paper-soft) 100%);
+        border: 1px solid rgba(21, 52, 47, 0.08);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .dashboard {
+        padding: 18px;
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #dfeae6;
+      }
+
+      .dots span:nth-child(1) { background: #f2b4a3; }
+      .dots span:nth-child(2) { background: #f7d38d; }
+      .dots span:nth-child(3) { background: #96d7b0; }
+
+      .chart {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        align-items: end;
+        gap: 10px;
+        height: 180px;
+        padding: 18px 12px 8px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #f4fbf7 0%, #edf2f0 100%);
+      }
+
+      .chart span {
+        display: block;
+        border-radius: 12px 12px 0 0;
+        background: linear-gradient(180deg, var(--green) 0%, var(--coral) 100%);
+        opacity: 0.9;
+      }
+
+      .chart span:nth-child(1) { height: 35%; }
+      .chart span:nth-child(2) { height: 52%; }
+      .chart span:nth-child(3) { height: 62%; }
+      .chart span:nth-child(4) { height: 58%; }
+      .chart span:nth-child(5) { height: 80%; }
+      .chart span:nth-child(6) { height: 72%; }
+      .chart span:nth-child(7) { height: 95%; }
+
+      .summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .summary-card {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .summary-card small {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .summary-card strong {
+        font-size: 1.5rem;
+        letter-spacing: -0.05em;
+      }
+
+      .floating-badge {
+        position: absolute;
+        right: -8px;
+        bottom: 20px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 36px rgba(17, 55, 48, 0.12);
+      }
+
+      .floating-badge strong {
+        display: block;
+        font-size: 1.15rem;
+      }
+
+      .floating-badge span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .features {
+        padding: 36px 0 20px;
+      }
+
+      .section-head {
+        margin-bottom: 26px;
+        text-align: center;
+      }
+
+      .section-head h2 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.05em;
+      }
+
+      .section-head p {
+        margin: 0 auto;
+        max-width: 640px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature {
+        padding: 24px;
+        border-radius: 24px;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 28px rgba(19, 47, 42, 0.04);
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        background: var(--mint);
+        color: var(--green-dark);
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .feature h3 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+        letter-spacing: -0.04em;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .cta {
+        padding: 46px 0 78px;
+      }
+
+      .cta-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        padding: clamp(24px, 4vw, 42px);
+        border-radius: 28px;
+        background: linear-gradient(135deg, var(--green-dark) 0%, #1a765f 100%);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .cta-box h3 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.05em;
+      }
+
+      .cta-box p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+      }
+
+      .cta-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .cta .btn-secondary {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.18);
+        color: white;
+      }
+
+      .cta .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      footer {
+        padding: 0 0 42px;
+        color: var(--muted);
+      }
+
+      .footer-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 920px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-box,
+        .feature-grid,
+        .cta-box {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .cta-box {
+          text-align: center;
+        }
+
+        .cta-actions {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          min-height: 68px;
+          gap: 10px;
+        }
+
+        .nav-actions {
+          gap: 8px;
+        }
+
+        .btn {
+          padding: 0.75rem 1rem;
+          font-size: 0.9rem;
+        }
+
+        .hero {
+          padding-top: 48px;
+        }
+
+        .mini-stats {
+          gap: 16px;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-wrap {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <a href="index.html" class="brand" aria-label="Northstar home">
+          <span class="brand-mark">N</span>
+          <span>Northstar</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="login.html">Login</a>
+          <a class="btn btn-primary" href="Registration.html">Create account</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-box">
+          <div>
+            <span class="eyebrow">Built for real momentum</span>
+            <h1>Turn ideas into progress.</h1>
+            <p class="lead">
+              Northstar brings your projects, priorities, and people into one calm workspace so your team can focus on what matters most and move faster together.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="Registration.html">Get started</a>
+              <a class="btn btn-secondary" href="login.html">Sign in</a>
+            </div>
+
+            <div class="mini-stats" aria-label="Company statistics">
+              <div class="mini-stat">
+                <strong>12k+</strong>
+                <span>teams onboarded</span>
+              </div>
+              <div class="mini-stat">
+                <strong>4.9/5</strong>
+                <span>average rating</span>
+              </div>
+              <div class="mini-stat">
+                <strong>3x</strong>
+                <span>faster planning</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Northstar dashboard preview">
+            <div class="card-panel dashboard">
+              <div class="dashboard-header">
+                <div class="dots" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <strong>Q3 overview</strong>
+              </div>
+
+              <div class="chart" aria-label="Overview chart">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="summary">
+                <div class="summary-card">
+                  <small>Goals met</small>
+                  <strong>84%</strong>
+                </div>
+                <div class="summary-card">
+                  <small>Deliveries</small>
+                  <strong>26</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-badge">
+              <strong>+18.2%</strong>
+              <span>this month</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="container">
+          <div class="section-head">
+            <h2>Everything your team needs to move clearly.</h2>
+            <p>Organize work, align effort, and keep the big picture visible without the extra noise.</p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature">
+              <div class="icon">✓</div>
+              <h3>Shared priorities</h3>
+              <p>Keep goals visible to everyone and ensure every task is connected to the outcome that matters.</p>
+            </article>
+
+            <article class="feature">
+              <div class="icon">◎</div>
+              <h3>Smarter planning</h3>
+              <p>Plan launches, schedules, and projects with a simple system that helps teams stay on track.</p>
+            </article>
+
+            <article class="feature">
+              <div class="icon">✦</div>
+              <h3>Faster execution</h3>
+              <p>Replace scattered updates with one reliable place to track work, progress, and blockers.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="about">
+        <div class="container">
+          <div class="cta-box">
+            <div>
+              <h3>Start with clarity.</h3>
+              <p>Bring your team together around a sharper focus and a simpler way to work.</p>
+            </div>
+
+            <div class="cta-actions">
+              <a class="btn btn-primary" href="Registration.html">Create an account</a>
+              <a class="btn btn-secondary" href="login.html">Login</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact">
+      <div class="container footer-wrap">
+        <div class="brand" aria-label="Northstar footer brand">
+          <span class="brand-mark">N</span>
+          <span>Northstar</span>
+        </div>
+        <span>© 2026 Northstar. All rights reserved.</span>
+      </div>
+    </footer>
+  </body>
+</html>
