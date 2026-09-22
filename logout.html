@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Signed out | Northstar</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+		:root {
+			--ink: #102b2a;
+			--muted: #68807d;
+			--line: #d9e6e1;
+			--paper: #fbfdfb;
+			--green: #1d6b59;
+			--green-dark: #145144;
+			--coral: #f18b72;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--ink);
+			background: #edf5f0;
+			font-family: 'DM Sans', sans-serif;
+		}
+
+		.page {
+			min-height: 100vh;
+			padding: 24px;
+			display: grid;
+			place-items: center;
+			background:
+				radial-gradient(circle at 8% 12%, rgba(241, 139, 114, .16), transparent 22rem),
+				radial-gradient(circle at 94% 88%, rgba(116, 190, 155, .2), transparent 26rem);
+		}
+
+		.panel {
+			width: min(560px, 100%);
+			padding: clamp(38px, 8vw, 76px);
+			text-align: center;
+			background: var(--paper);
+			border: 1px solid rgba(16, 43, 42, .08);
+			border-radius: 28px;
+			box-shadow: 0 28px 80px rgba(37, 78, 67, .15);
+			animation: arrive .7s ease both;
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: 17px;
+			font-weight: 700;
+			letter-spacing: -.02em;
+		}
+
+		.brand-mark {
+			width: 30px;
+			height: 30px;
+			display: grid;
+			place-items: center;
+			color: var(--green-dark);
+			background: var(--coral);
+			border-radius: 9px 9px 9px 2px;
+			font-size: 14px;
+		}
+
+		.check {
+			width: 64px;
+			height: 64px;
+			margin: 46px auto 24px;
+			display: grid;
+			place-items: center;
+			color: #fff;
+			background: var(--green);
+			border-radius: 50%;
+			font-size: 30px;
+		}
+
+		h1 {
+			margin: 0;
+			font-family: 'Space Grotesk', sans-serif;
+			font-size: clamp(34px, 6vw, 48px);
+			line-height: 1;
+			letter-spacing: -.05em;
+		}
+
+		p {
+			margin: 18px auto 30px;
+			max-width: 350px;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		.button {
+		display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 52px;
+			padding: 0 24px;
+			color: #fff;
+			background: var(--green-dark);
+			border-radius: 10px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: background .2s, transform .2s;
+		}
+
+		.button:hover { background: var(--green); transform: translateY(-1px); }
+
+		@keyframes arrive {
+			from { opacity: 0; transform: translateY(14px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@media (max-width: 480px) {
+			.page { padding: 12px; }
+			.panel { border-radius: 20px; }
+			.check { margin-top: 38px; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page">
+		<section class="panel" aria-labelledby="logout-title">
+			<div class="brand"><span class="brand-mark">N</span> northstar</div>
+			<div class="check" aria-hidden="true">&#10003;</div>
+			<h1 id="logout-title">You're signed out.</h1>
+			<p>Your Northstar session has ended. Come back whenever you’re ready to keep moving forward.</p>
+			<a class="button" href="login.html">Sign in again</a>
+		</section>
+	</main>
+	<script>
+		localStorage.removeItem('northstar-user');
+		sessionStorage.clear();
+	</script>
+</body>
+</html>
